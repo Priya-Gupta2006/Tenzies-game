@@ -1,7 +1,10 @@
+import { useState } from "react"
 import Die from "./Die.jsx"
 
 
 export default function App(){
+
+  const [dice,setDice]=useState(generateAllNewDice());
 
   function generateAllNewDice(){
     return new Array(10)
@@ -9,23 +12,19 @@ export default function App(){
           .map(()=> Math.ceil(Math.random()*6))
 
   }
+  function rollDice(){
+    setDice(generateAllNewDice());
+  }
 
-  console.log(generateAllNewDice());
+    const diceElements=dice.map(num => <Die value={num}/>)
+ 
 
   return (
     <main>
       <div className="dice-container">
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
-        <Die value={1}/>
+        {diceElements} 
       </div>
+      <button className="roll-dice" onClick={rollDice}>Roll</button>
     </main>
   )
 }
